@@ -91,21 +91,21 @@ rm -f "$temp_file"
 set -o pipefail
 msg_ok "Installed Golang"
 
-msg_info "Installing Redis"
-$STD apt-get install -y redis-server
-systemctl enable -q --now redis-server
-msg_ok "Installed Redis"
+# msg_info "Installing Redis"
+# $STD apt-get install -y redis-server
+# systemctl enable -q --now redis-server
+# msg_ok "Installed Redis"
 
 msg_info "Installing PostgreSQL"
-$STD apt-get install -y postgresql postgresql-contrib
-DB_NAME="authentik"
-DB_USER="authentik"
+# $STD apt-get install -y postgresql postgresql-contrib
+# DB_NAME="authentik"
+# DB_USER="authentik"
 DB_PASS="$(openssl rand -base64 18 | cut -c1-13)"
-$STD sudo -u postgres psql -c "CREATE DATABASE $DB_NAME;"
-$STD sudo -u postgres psql -c "CREATE USER $DB_USER WITH PASSWORD '$DB_PASS';"
-$STD sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USER;" 
-$STD sudo -u postgres psql -c "ALTER DATABASE $DB_NAME OWNER TO $DB_USER;"
-$STD sudo -u postgres psql -c "ALTER USER $DB_USER WITH SUPERUSER;"
+# $STD sudo -u postgres psql -c "CREATE DATABASE $DB_NAME;"
+# $STD sudo -u postgres psql -c "CREATE USER $DB_USER WITH PASSWORD '$DB_PASS';"
+# $STD sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USER;"
+# $STD sudo -u postgres psql -c "ALTER DATABASE $DB_NAME OWNER TO $DB_USER;"
+# $STD sudo -u postgres psql -c "ALTER USER $DB_USER WITH SUPERUSER;"
 msg_ok "Installed PostgreSQL"
 
 msg_info "Installing authentik"
@@ -175,10 +175,10 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target
 EOF
-systemctl enable -q --now authentik-server
-sleep 2
-systemctl enable -q --now authentik-worker
-msg_ok "Created Services"
+# systemctl enable -q --now authentik-server
+# sleep 2
+# systemctl enable -q --now authentik-worker
+# msg_ok "Created Services"
 
 motd_ssh
 customize
